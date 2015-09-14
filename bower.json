@@ -1,0 +1,18 @@
+{
+  "name": "slimvc",
+  "version": "1.0.0",
+  "authors": [
+    "Simon Archer <simon@archybold.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  }
+}

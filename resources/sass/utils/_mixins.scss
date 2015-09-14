@@ -1,0 +1,328 @@
+@mixin inline-block{
+	display: -moz-inline-stack;
+	display: inline-block;
+	vertical-align: top;
+	zoom: 1;
+	*display: inline;
+}
+
+@mixin border-radius($radius){
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	border-radius: $radius;
+}
+
+@mixin horizontal-gradient($left, $right, $opacity: 1){
+	@if $opacity < 1{
+		background: transparent;
+	}
+	@else{
+		background: $left;
+	}
+	background: -moz-linear-gradient(left,  $left 0%, $right 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,$left), color-stop(100%,$right)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left,  $left 0%,$right 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left,  $left 0%,$right 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left,  $left 0%,$right 100%); /* IE10+ */
+	background: linear-gradient(to right,  $left 0%,$right 100%); /* W3C */
+	@if $opacity < 1{
+		$rgba-left: rgba($left, $opacity);
+		$ie-hex-str-left: ie-hex-str($rgba-left);
+		$rgba-right: rgba($right, $opacity);
+		$ie-hex-str-right: ie-hex-str($rgba-right);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#{$ie-hex-str-left}", endColorstr="#{$ie-hex-str-right}",GradientType=1 ); /* IE6-9 */
+	}
+	@else{
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#{$left}", endColorstr="#{$right}",GradientType=1 ); /* IE6-8 */
+	}
+}
+
+@mixin vertical-gradient($top, $bottom, $opacity: 1){
+	@if $opacity < 1{
+		background: transparent;
+	}
+	@else{
+		background: $top; /* Old browsers */
+	}
+	background: -moz-linear-gradient(top,  $top 0%, $bottom 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  $top 0%,$bottom 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  $top 0%,$bottom 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  $top 0%,$bottom 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  $top 0%,$bottom 100%); /* W3C */
+	@if $opacity < 1{
+		$rgba-left: rgba($top, $opacity);
+		$ie-hex-str-left: ie-hex-str($rgba-left);
+		$rgba-right: rgba($bottom, $opacity);
+		$ie-hex-str-right: ie-hex-str($rgba-right);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#{$ie-hex-str-left}", endColorstr="#{$ie-hex-str-right}",GradientType=0 ); /* IE6-9 */
+	}
+	@else{
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#{$top}", endColorstr="#{$bottom}",GradientType=0 ); /* IE6-9 */
+	}
+}
+
+@mixin diagonal-gradient($top, $bottom){
+	background: $top; /* Old browsers */
+	background: -moz-linear-gradient(-45deg,  $top 0%, $bottom 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,$top), color-stop(100%,$bottom)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(-45deg,  $top 0%,$bottom 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(-45deg,  $top 0%,$bottom 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(-45deg,  $top 0%,$bottom 100%); /* IE10+ */
+	background: linear-gradient(135deg,  $top 0%,$bottom 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#{$top}", endColorstr="#{$bottom}",GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+@mixin border-box{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	// IE 7 polyfill
+	*behavior: url(/wp-content/themes/streamamg/js/boxsizing.htc);
+}
+
+@mixin background-size-cover{
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	-ms-behavior: url(/wp-content/themes/streamamg/js/backgroundsize.htc);
+}
+
+@mixin opacity($trans) {
+	filter: alpha(opactiy=($trans * 100));
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$trans * 100})";
+	-moz-opacity: $trans;
+	-khtml-opacity: $trans;
+	opacity: $trans;
+}
+
+@mixin transparent($color, $alpha) {
+	$rgba: rgba($color, $alpha);
+	$ie-hex-str: ie-hex-str($rgba);
+	background-color: transparent;
+	background-color: $rgba;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
+	zoom: 1;
+}
+
+@mixin abs-fill(){
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+}
+
+@mixin hide-and-show($speed, $show-selector, $extra-trans-prop: '', $extra-trans-speed: '',
+	$extra-trans-timing: '', $extra-trans-delay: ''){
+	@include opacity(0);
+	visibility: hidden;
+	-webkit-transition-delay: 0, $speed, $extra-trans-delay;
+	-moz-transition-delay: 0, $speed, $extra-trans-delay;
+	-o-transition-delay: 0, $speed, $extra-trans-delay;
+	transition-delay: 0, $speed, $extra-trans-delay;
+	-webkit-transition-duration: $speed, $speed, $extra-trans-speed;
+	-moz-transition-duration: $speed, $speed, $extra-trans-speed;
+	-o-transition-duration: $speed, $speed, $extra-trans-speed;
+	transition-duration: $speed, $speed, $extra-trans-speed;
+	-webkit-transition-property: opacity, visibility, $extra-trans-prop;
+	-moz-transition-property: opacity, visibility, $extra-trans-prop;
+	-o-transition-property: opacity, visibility, $extra-trans-prop;
+	transition-property: opacity, visibility, $extra-trans-prop;
+	-webkit-transition-timing-function: linear, linear, $extra-trans-timing;
+	-moz-transition-timing-function: linear, linear, $extra-trans-timing;
+	-o-transition-timing-function: linear, linear, $extra-trans-timing;
+	transition-timing-function: linear, linear, $extra-trans-timing;
+
+	#{$show-selector} &{
+		visibility: visible;
+		@include opacity(1);
+		-webkit-transition-delay: 0, 0, $extra-trans-delay;
+		-moz-transition-delay: 0, 0, $extra-trans-delay;
+		-o-transition-delay: 0, 0, $extra-trans-delay;
+		transition-delay: 0, 0, $extra-trans-delay;
+	}
+}
+
+@mixin keyframes($name) {
+	@-webkit-keyframes #{$name} {
+		@content; 
+	}
+	@-moz-keyframes #{$name} {
+		@content;
+	}
+	@-ms-keyframes #{$name} {
+		@content;
+	}
+	@keyframes #{$name} {
+		@content;
+	} 
+}
+
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  -moz-animation: #{$str};
+  -ms-animation: #{$str};
+  -o-animation: #{$str};
+  animation: #{$str};      
+}
+
+@mixin transform($transforms) {
+	   -moz-transform: $transforms;
+	     -o-transform: $transforms;
+	    -ms-transform: $transforms;
+	-webkit-transform: $transforms;
+          transform: $transforms;
+}
+
+@function prefix($property, $prefixes: (webkit moz o ms)) {
+    $vendor-prefixed-properties: transform background-clip background-size;
+    $result: ();
+    @each $prefix in $prefixes {
+       @if index($vendor-prefixed-properties, $property) {
+         $property: -#{$prefix}-#{$property}
+       }
+       $result: append($result, $property);
+    }
+    @return $result;
+}
+
+@function trans-prefix($transition, $prefix: moz) {
+    $prefixed: ();
+    @each $trans in $transition {
+        $prop-name: nth($trans, 1);
+        $vendor-prop-name: prefix($prop-name, $prefix);
+        $prop-vals: nth($trans, 2);
+        $prefixed: append($prefixed, ($vendor-prop-name $prop-vals), comma);
+    }
+    
+    @return $prefixed;
+}
+
+
+@mixin transition($values...) { 
+    $transitions: ();
+    @each $declaration in $values {
+        $prop: nth($declaration, 1);
+        $prop-opts: ();
+        $length: length($declaration);
+        @for $i from 2 through $length {
+            $prop-opts: append($prop-opts, nth($declaration, $i));   
+        }
+        $trans: ($prop, $prop-opts);
+        $transitions: append($transitions, $trans, comma);
+    }
+      
+    -webkit-transition: trans-prefix($transitions, webkit);
+    -moz-transition: trans-prefix($transitions, moz);
+    -o-transition: trans-prefix($transitions, o);
+    transition: $values;
+}
+
+// !!! These mixins cause issues on IE, iOS 7 and unsupported browsers, use with care.
+@mixin fullheight() {
+
+	height: 700px;
+	height: 100vh;
+
+	.no-flexbox & {
+		// Targeting old Safari mainly
+		height: 700px;
+	}
+
+	/* Android device fixes */
+	@media all and (device-width: 480px) and (device-height: 854px)  and (orientation:portrait) {
+		height: 854px;
+	}
+
+	@media all and (device-width: 480px) and (device-height: 854px)  and (orientation:landscape) {
+			height: 480px;
+	}
+
+
+	@media all and (device-width: 360px) and (device-height: 640px)  and (orientation:portrait) {
+			height: 640px;
+	}
+
+	@media all and (device-width: 360px) and (device-height: 640px)  and (orientation:landscape) {
+			height: 360px;
+	}
+
+	@media all and (device-width: 320px) and (device-height: 568px)  and (orientation:portrait) {
+			height: 568px;
+	}
+
+	@media all and (device-width: 320px) and (device-height: 568px)  and (orientation:landscape) {
+			height: 568px;
+	}
+
+
+	/* iOS 7 fixes */
+	//iPhone 3 and 4 portrait
+	@media all and (device-width: 320px) and (device-height: 480px) and (orientation:portrait){  
+		height: 480px;
+	}
+	//iPhone 3 and 4 landscape
+	@media all and (device-width: 320px) and (device-height: 480px) and (orientation:landscape){  
+		height: 320px;
+	}
+	//iPhone 5 portrait
+	@media all and (device-width: 320px) and (device-height: 568px) and (orientation:portrait){  
+		height: 568px;
+	}
+	//iPhone 5 landscape
+	@media all and (device-width: 320px) and (device-height: 568px) and (orientation:landscape){  
+		height: 320px;
+	}
+	//iPad portrait
+	@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait){  
+		height: 1024px;
+	} 
+	//iPad landscape
+	@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:landscape){
+		height: 768px;
+	}
+
+	/**
+	* iPhone 5
+	* You can also target devices with aspect ratio.
+	*/
+	@media screen and (device-aspect-ratio: 40/71) {
+		height: 500px;
+	}
+}
+
+@mixin height($vh) {
+	
+	height: (700 / 100 * $vh) * 1px;
+	height: $vh * 1vh;
+
+	.no-flexbox & {
+		height: (700 / 100 * $vh) * 1px;
+	}
+
+	/** 
+	* iPad with portrait orientation. 1024 = 100vh
+	*/
+	@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait){
+		height: (1024 / 100 * $vh) * 1px;
+	}
+
+	/** 
+	* iPad with landscape orientation. 768 = 100vh
+	*/
+	@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:landscape){
+		height: (768 / 100 * $vh) * 1px;
+	}
+
+	/**
+	* iPhone 5
+	* You can also target devices with aspect ratio.
+	*/
+	@media screen and (device-aspect-ratio: 40/71) {
+		height: (500 / 100 * $vh) * 1px;
+	}
+
+}

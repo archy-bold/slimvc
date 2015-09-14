@@ -1,0 +1,13 @@
+@mixin copy-font($size: 14px, $weight: 400, $style: normal){
+	font-family: Helvetica, Arial, san-serif;
+	font-size: $size;
+	font-weight: $weight;
+	font-style: $style;
+}
+
+@mixin heading-font($size, $weight: bold, $style: normal){
+	font-family: Helvetica, Arial, san-serif;
+	font-size: $size;
+	font-weight: $weight;
+	font-style: $style;
+}

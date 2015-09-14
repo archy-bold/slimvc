@@ -1,0 +1,24 @@
+{% if og_title is defined %}
+	<meta property="og:title" content="{{ og_title }}">
+{% endif %}
+{% if og_description is defined %}
+	<meta property="og:description" content="{{ og_description }}">
+{% endif %}
+{% if og_type is defined %}
+	<meta property="og:type" content="{{ og_type }}">
+{% endif %}
+{% if og_image is defined %}
+	<meta property="og:image" content="{{ og_image }}">
+{% endif %}
+{% if og_url is defined %}
+	<meta property="og:url" content="{{ og_url }}">
+{% endif %}
+{% if og_site is defined %}
+	<meta property="og:site_name" content="{{ og_site }}">
+{% endif %}
+{% if og_image_width is defined %}
+	<meta property="og:image:width" content="{{ og_image_width }}">
+{% endif %}
+{% if og_image_height is defined %}
+	<meta property="og:image:height" content="{{ og_image_height }}">
+{% endif %}

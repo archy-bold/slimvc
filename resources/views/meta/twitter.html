@@ -1,0 +1,18 @@
+{% if tw_type is defined %}
+	<meta name="twitter:card" content="{{ tw_type }}">
+{% endif %}
+{% if tw_user is defined %}
+	<meta name="twitter:site" content="{{ '@'.tw_user }}">
+{% endif %}
+{% if tw_creator is defined %}
+	<meta name="twitter:creator" content="{{ '@'.tw_creator }}">
+{% endif %}
+{% if tw_title is defined %}
+	<meta name="twitter:title" content="{{ tw_title }}">
+{% endif %}
+{% if tw_description is defined %}
+	<meta name="twitter:description" content="{{ tw_description }}">
+{% endif %}
+{% if tw_image is defined %}
+	<meta name="twitter:image" content="{{ tw_image }}">
+{% endif %}
