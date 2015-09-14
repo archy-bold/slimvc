@@ -6,18 +6,20 @@ class Route{
 
 	protected $controllers = array();
 
+	protected $app;
+
 	protected function __construct(){
-		
+		$this->app = app();
 	}
 	
 	public function get($route, $destination){
 		$callable = $this->getCallable($destination);
-		app()->get($route, $callable);
+		$this->app->get($route, $callable);
 	}
 	
 	public function post($route, $destination){
 		$callable = $this->getCallable($destination);
-		app()->post($route, $callable);
+		$this->app->post($route, $callable);
 	}
 
 	protected function getController($destination){
