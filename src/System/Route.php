@@ -10,13 +10,13 @@ class Route{
 		
 	}
 	
-	public static function get($route, $destination){
+	public function get($route, $destination){
 		$routeObj = self::getInstance();
 		$callable = $routeObj->getCallable($destination);
 		app()->get($route, $callable);
 	}
 	
-	public static function post($route, $destination){
+	public function post($route, $destination){
 		$routeObj = self::getInstance();
 		$callable = $routeObj->getCallable($destination);
 		app()->post($route, $callable);
@@ -65,7 +65,7 @@ class Route{
 	/**
 	 * Instantiate the singleton Route.
 	 */
-	protected static function getInstance(){
+	public static function getInstance(){
 		static $instance = null;
 
 		// Instantiate if null.
