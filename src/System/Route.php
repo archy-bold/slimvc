@@ -11,14 +11,12 @@ class Route{
 	}
 	
 	public function get($route, $destination){
-		$routeObj = self::getInstance();
-		$callable = $routeObj->getCallable($destination);
+		$callable = $this->getCallable($destination);
 		app()->get($route, $callable);
 	}
 	
 	public function post($route, $destination){
-		$routeObj = self::getInstance();
-		$callable = $routeObj->getCallable($destination);
+		$callable = $this->getCallable($destination);
 		app()->post($route, $callable);
 	}
 
