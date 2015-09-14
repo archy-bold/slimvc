@@ -1,0 +1,11 @@
+$fix-mqs: 100em;
+$old-ie: true;
+
+body {
+	min-width: 1024px;
+}
+
+@import "all";
+
+// Disgusting hacks!
+@import "ie-hacks";
