@@ -5,6 +5,10 @@ use App\Exception\RouteException;
 class Route{
 
 	protected $controllers = array();
+
+	protected function __construct(){
+		
+	}
 	
 	public static function get($route, $destination){
 		$routeObj = self::getInstance();
