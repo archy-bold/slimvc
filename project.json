@@ -1,0 +1,19 @@
+{
+	"name": "slimvc",
+	"version": "1.0.0",
+	"description": "",
+	
+	"resources": {
+		"scss": "./resources/sass",
+		"js": "./resources/js",
+		"sprites": "./resources/sprites",
+		"bower": "./bower_components"
+	},
+	"dependencies": [
+	],
+	"build": {
+		"css": "./public/assets/css",
+		"js": "./public/assets/js",
+		"sprites": "./public/assets/img"
+	}
+}

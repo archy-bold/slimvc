@@ -1,6 +1,5 @@
 <?php
 require '../src/bootstrap.php';
-use App\System\Route;
 
 /* ROUTES HERE */
 $route = route();
