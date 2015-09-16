@@ -1,5 +1,7 @@
 <?php
 
+use App\System\Route;
+
 function url($to = '/'){
 	// Make sure it has a leading /
 	if (strpos($to, '/') !== 0){
@@ -19,4 +21,8 @@ function app(){
 	global $app;
 
 	return $app;
+}
+
+function route(){
+	return Route::getInstance();
 }

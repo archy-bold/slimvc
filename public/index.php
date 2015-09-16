@@ -1,10 +1,10 @@
 <?php
 require '../src/bootstrap.php';
-use App\System\Route;
 
 /* ROUTES HERE */
+$route = route();
 
-Route::get('/', 'WelcomeController@index');
+$route->get('/', 'WelcomeController@index');
 
 /* END ROUTES */
 

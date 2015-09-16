@@ -1,4 +1,4 @@
-<phpunit bootstrap="vendor/autoload.php">
+<phpunit bootstrap="tests/bootstrap.php">
     <logging>
         <log type="coverage-clover" target="storage/logs/test/clover.xml"/>
     </logging>

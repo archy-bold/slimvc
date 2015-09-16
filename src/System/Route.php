@@ -6,27 +6,27 @@ class Route{
 
 	protected $controllers = array();
 
+	protected $app;
+
 	protected function __construct(){
-		
+		$this->app = app();
 	}
 	
-	public static function get($route, $destination){
-		$routeObj = self::getInstance();
-		$callable = $routeObj->getCallable($destination);
-		app()->get($route, $callable);
+	public function get($route, $destination){
+		$callable = $this->getCallable($destination);
+		$this->app->get($route, $callable);
 	}
 	
-	public static function post($route, $destination){
-		$routeObj = self::getInstance();
-		$callable = $routeObj->getCallable($destination);
-		app()->post($route, $callable);
+	public function post($route, $destination){
+		$callable = $this->getCallable($destination);
+		$this->app->post($route, $callable);
 	}
 
 	protected function getController($destination){
 		$controllerStr = substr($destination, 0, strpos($destination, '@'));
 
 		if (empty($controllerStr)){
-			throw new RouteException("Invalid controller destination given, must be in format "
+			throw RouteException::getInvalidController("Invalid controller destination given, must be in format "
 				. "'Countroller@method'.");
 		}
 
@@ -35,7 +35,7 @@ class Route{
 			// We've not instantiated this controller yet. Do that.
 			$className = 'App\\Controller\\' . $controllerStr;
 			if (!class_exists($className)){
-				throw new RouteException("The given controller, $className, doesn't exist. "
+				throw RouteException::getMissingConstructor("The given controller, $className, doesn't exist. "
 					. "It either needs to be created in src\\Controller\\ or the spelling is incorrect.");
 			}
 
@@ -51,12 +51,12 @@ class Route{
 		$method = substr($destination, strpos($destination, '@') + 1);
 
 		if (empty($method)){
-			throw new RouteException("Invalid controller destination given, must be in format "
+			throw RouteException::getInvalidController("Invalid controller destination given, must be in format "
 				. "'Countroller@method'.");
 		}
 
 		if (!method_exists($controller, $method)){
-			throw new RouteException("The given method, $method, does not exist on the controller.");
+			throw RouteException::getMissingConstructorMethod("The given method, $method, does not exist on the controller.");
 		}
 		
 		return array($controller, $method);
@@ -65,7 +65,7 @@ class Route{
 	/**
 	 * Instantiate the singleton Route.
 	 */
-	protected static function getInstance(){
+	public static function getInstance(){
 		static $instance = null;
 
 		// Instantiate if null.
